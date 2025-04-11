@@ -8,7 +8,7 @@ alg-gptel-saverestore defines basic functionality for saving and restoring conte
 
 It defines a function ~alg/gptel-restore-context~, which restores the context when you pass it a list of files, buffers, and tools.
 
-It also defines a function ~alg/gptel-save-context~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-save-context~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
+It also defines a function ~alg/gptel-restore-context~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-save-context~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
 
 This works with gptel as of [2025-04-11 Fri 15:03].
 
