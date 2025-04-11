@@ -1,18 +1,18 @@
 * GPTel helpers
 
-This repo contains two emacs helpers packages, for working with gptel.
+This repo contains two Emacs helper packages for working with gptel.
 
-alg-gptel-tools helpers just defines standard tools for tool use, based on the examples karthink provided in the tool use PR.
+alg-gptel-tools defines standard tools for tool use, based on the examples karthink provided in the tool use PR.
 
-alg-gptel-saverestore defines basic functionality for saving and restoring context, so that you switch the active context set when you switched projects or when you restart emacs. Here's how it works.
+alg-gptel-saverestore defines basic functionality for saving and restoring context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
 
-It defines a function ~alg/gptel-restore-context~, which will restore the context, when you pass it a list of files, buffers, and tools.
+It defines a function ~alg/gptel-restore-context~, which restores the context when you pass it a list of files, buffers, and tools.
 
-It also function ~alg/gptel-save-context~, which inserts into the current buffer an form representing an invocation of ~alg/gptel-save-context~. So you can save this form into a lisp file associated with your projects, or within its org-mode notes, or whatever.
+It also defines a function ~alg/gptel-save-context~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-save-context~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
 
 This works with gptel as of [2025-04-11 Fri 15:03].
 
-If you put these subdirectories into a ~setups/~ directory in your load path, then you could install them with the following use-package declaration
+If you put these subdirectories into a ~setups/~ directory in your load path, you can install them with the following use-package declaration:
 
 #+begin_src lisp
 (use-package alg-gptel-tools
@@ -24,5 +24,4 @@ If you put these subdirectories into a ~setups/~ directory in your load path, th
   :after gptel)
 #+end_src
 
-I'm also including the original AI chat used to develop this package, for the heck of it.
-
+I'm also including the original AI chat used to develop this package, for reference.
