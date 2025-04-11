@@ -1,0 +1,26 @@
+* GPTel helpers
+
+This repo contains two emacs helpers packages, for working with gptel.
+
+alg-gptel-tools helpers just defines standard tools for tool use, based on the examples karthink provided.
+
+alg-gptel-saverestore defines a function ~alg/gptel-save-context~, which inserts into the current buffer an emacs lisp form, which can you evaluate in order to restore the current context and tools selection. That form depends on ~alg/gptel-restore-context~, which will restore the context.
+
+This works with gptel as of [2025-04-11 Fri 15:03].
+
+If you put these subdirectories into a ~setups/~ directory in your load path, then you could install them with the following use-package declaration
+
+#+begin_src lisp
+(use-package alg-gptel-tools
+  :load-path "setups/alg-gptel-tools/"
+  :after gptel)
+
+(use-package alg-gptel-saverestore
+  :load-path "setups/alg-gptel-saverestore/"
+  :after gptel)
+#+end_src
+
+
+I'm also including the original AI chat used to develop this package, for the heck of it.
+
+
