@@ -1,8 +1,12 @@
 * GPTel helpers
 
-This repo contains two Emacs helper packages for working with gptel.
+This repo contains various Emacs helper packages for working with gptel.
+
+** alg-gptel-tools
 
 alg-gptel-tools defines standard tools for tool use, based on the examples karthink provided in the [[https://github.com/karthink/gptel/issues/514][tool use issue]].
+
+** alg-gptel-saverestore
 
 alg-gptel-saverestore defines basic functionality for saving and restoring context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
 
@@ -11,6 +15,12 @@ It defines a function ~alg/gptel-restore-context~, which restores the context wh
 It also defines a function ~alg/gptel-save-context~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-restore-context~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
 
 This works with gptel as of [2025-04-11 Fri 15:03].
+
+** alg-gptel-export
+
+Facilitates export to markdown, for presentation as gists by using ~igist-new-gist-from-buffer~
+
+** how to setup
 
 If you put these subdirectories into a ~setups/~ directory in your load path, you can install them with the following use-package declaration:
 
