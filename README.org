@@ -22,16 +22,22 @@ Facilitates export to markdown, for presentation as gists by using ~igist-new-gi
 
 ** how to setup
 
-If you put these subdirectories into a ~setups/~ directory in your load path, you can install them with the following use-package declaration:
+If you put the subdirectory alg-gptel-helpers into a ~setups/~ directory in your load path, you can install them with the following use-package declaration:
 
-#+begin_src lisp
+
+#+begin_src emacs-lisp
 (use-package alg-gptel-tools
-  :load-path "setups/alg-gptel-tools/"
-  :after gptel)
+   :load-path "setups/alg-gptel-helpers/"
+   :after gptel)
 
-(use-package alg-gptel-saverestore
-  :load-path "setups/alg-gptel-saverestore/"
-  :after gptel)
-#+end_src
+(use-package alg-gptel
+  :load-path "setups/alg-gptel-helpers/"
+  :commands (alg/gptel-export-to-markdown-buffer
+             alg/gptel-org-toggle-response-highlight
+             alg/gptel-save-context
+             alg/gptel-restore-context
+             alg/gptel-clear-context
+             alg/gptel-upgrade))
+#+end_src             
 
 I'm also including the original AI chat used to develop this package, for reference.
