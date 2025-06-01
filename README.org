@@ -2,27 +2,7 @@
 
 This repo contains various Emacs helper packages for working with gptel.
 
-** alg-gptel-upgrade
-
-The function ~alg/gptel-upgrade~ upgrades gptel to the latest version of package.el.
-
-** alg-gptel-tools
-
-alg-gptel-tools defines standard tools for the AI to use. This is directly copied from the examples karthink provided in the [[https://github.com/karthink/gptel/issues/514][tool use issue]].
-
-** alg-gptel-saverestore
-
-alg-gptel-saverestore defines limited functionality for saving and restoring the global context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
-
-It defines a function ~alg/gptel-context-restore~, which restores the context when you pass it a list of files, buffers, and tools.
-
-It also defines a function ~alg/gptel-context-save~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-context-restore~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
-
-This is less useful, now that you can save the file context associated with a chat, by including that context via link.
-
-This works with gptel as of [2025-06-01 Sun 13:25].
-
-** other functions
+** Helper functions
 
 - The function ~alg/gptel-upgrade~ upgrades gptel to the latest version of package.el.
 - ~alg/gptel-export-to-markdown-buffer~ does what it says. Handy for
@@ -32,10 +12,26 @@ This works with gptel as of [2025-06-01 Sun 13:25].
 
 - ~alg/org-kill-file-link~ saves in the kill buffer a valid org link to
   the current file being visited, so that you may yank that link into
-  a chat buffer later.
+  a chat buffer later. (This has an dependency.)
 
 - ~alg/generate-gptel-directives~ generates a value for ~gptel-directives~
   based on a directory of text files.
+
+** alg-gptel-tools
+
+The package alg-gptel-tools defines standard tools for the AI to use. This is directly copied from the examples karthink provided in the [[https://github.com/karthink/gptel/issues/514][tool use issue]].
+
+** alg-gptel-saverestore
+
+alg-gptel-saverestore defines limited functionality for saving and restoring the global context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
+
+It defines a function ~alg/gptel-context-restore~, which restores the context when you pass it a list of files, buffers, and tools.
+
+It also defines a function ~alg/gptel-context-save~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-context-restore~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
+
+This functionality is less generally necessary, now that gptel lets you provide file context via an org link, which is naturally saved along with the chat itself. It is still handy for scripting the automatic resumption of more complicated global contexts -- e.g., adding shell buffers, IELM buffers, error message buffers, etc..
+
+This works with gptel as of [2025-06-01 Sun 13:25].
 
 ** how to install
 
