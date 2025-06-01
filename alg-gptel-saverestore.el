@@ -1,10 +1,9 @@
- (require 'gptel)
- (require 'gptel-context)
-;;(eval-when-compile (require 'gptel))
+(require 'gptel)
+(require 'gptel-context)
 (message "initializing alg-gptel-saverestore.el")
 
 ;;;###autoload
-(defun alg/gptel-save-context ()
+(defun alg/gptel-context-save ()
   "Save current gptel context as elisp code in the current buffer.
 Inserts code that when evaluated will restore the current context,
 including files (with absolute paths), buffer names, and selected tools."
@@ -20,13 +19,13 @@ including files (with absolute paths), buffer names, and selected tools."
             ((buffer-live-p (car item))
              (push (buffer-name (car item)) buffers))))
     ;; Insert the code directly
-    (insert "(alg/gptel-restore-context\n")
+    (insert "(alg/gptel-context-restore\n")
     (insert (format " '%S  ; Files\n" (reverse files)))
     (insert (format " '%S  ; Buffers\n" (reverse buffers)))
     (insert (format " '%S) ; Tools\n" tools))))
 
 ;;;###autoload
-(defun alg/gptel-restore-context (files buffers tools)
+(defun alg/gptel-context-restore (files buffers tools)
   "Initialize gptel context with specified FILES, BUFFERS and TOOLS.
 
 FILES is a list of file paths (tildes will be expanded).
@@ -66,5 +65,12 @@ Clears existing context and tools before initializing new ones."
           (error (message "Warning: Error setting tools: %s"
                          (error-message-string err))
                  nil))))
+
+;;;###autoload
+(defun alg/gptel-context-clear ()
+  "Clears context and tools"
+  (interactive)
+  (gptel-context-remove-all)
+  (setq gptel-tools nil))
 
 (provide 'alg-gptel-saverestore)

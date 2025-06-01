@@ -2,42 +2,72 @@
 
 This repo contains various Emacs helper packages for working with gptel.
 
+** alg-gptel-upgrade
+
+The function ~alg/gptel-upgrade~ upgrades gptel to the latest version of package.el.
+
 ** alg-gptel-tools
 
-alg-gptel-tools defines standard tools for tool use, based on the examples karthink provided in the [[https://github.com/karthink/gptel/issues/514][tool use issue]].
+alg-gptel-tools defines standard tools for the AI to use. This is directly copied from the examples karthink provided in the [[https://github.com/karthink/gptel/issues/514][tool use issue]].
 
 ** alg-gptel-saverestore
 
-alg-gptel-saverestore defines basic functionality for saving and restoring context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
+alg-gptel-saverestore defines limited functionality for saving and restoring the global context, so you can switch the active context set when you switch projects or restart Emacs. Here's how it works:
 
-It defines a function ~alg/gptel-restore-context~, which restores the context when you pass it a list of files, buffers, and tools.
+It defines a function ~alg/gptel-context-restore~, which restores the context when you pass it a list of files, buffers, and tools.
 
-It also defines a function ~alg/gptel-save-context~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-restore-context~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
+It also defines a function ~alg/gptel-context-save~, which inserts into the current buffer a form representing an invocation of ~alg/gptel-context-restore~. You can save this form into a Lisp file associated with your projects, within its org-mode notes, or elsewhere.
 
-This works with gptel as of [2025-04-11 Fri 15:03].
+This is less useful, now that you can save the file context associated with a chat, by including that context via link.
 
-** alg-gptel-export
+This works with gptel as of [2025-06-01 Sun 13:25].
 
-Facilitates export to markdown, for presentation as gists by using ~igist-new-gist-from-buffer~
+** other functions
 
-** how to setup
+- The function ~alg/gptel-upgrade~ upgrades gptel to the latest version of package.el.
+- ~alg/gptel-export-to-markdown-buffer~ does what it says. Handy for
+  then exporting as a gist by using ~igist-new-gist-from-buffer~
+- ~alg/gptel-toggle-verbosity~ enables/disables debug logging
+- ~alg/gptel-toggle-highlight~ enables/disables highlighting of AI responses on a saved buffer.
 
-If you put the subdirectory alg-gptel-helpers into a ~setups/~ directory in your load path, you can install them with the following use-package declaration:
+- ~alg/org-kill-file-link~ saves in the kill buffer a valid org link to
+  the current file being visited, so that you may yank that link into
+  a chat buffer later.
 
+- ~alg/generate-gptel-directives~ generates a value for ~gptel-directives~
+  based on a directory of text files.
+
+** how to install
+
+If you manually copy the subdirectory alg-gptel-helpers into a ~setups/~ directory off of your user-emacs-directory, then you can enable them with the following use-package declaration:
 
 #+begin_src emacs-lisp
-(use-package alg-gptel-tools
-   :load-path "setups/alg-gptel-helpers/"
-   :after gptel)
+  (use-package alg-gptel-tools
+    :load-path "setups/alg-gptel-helpers/"
+    :after gptel)
 
-(use-package alg-gptel
-  :load-path "setups/alg-gptel-helpers/"
-  :commands (alg/gptel-export-to-markdown-buffer
-             alg/gptel-org-toggle-response-highlight
-             alg/gptel-save-context
-             alg/gptel-restore-context
-             alg/gptel-clear-context
-             alg/gptel-upgrade))
+  (use-package alg-gptel-helpers
+    :after gptel
+    ;; autloads regenerated manually with:
+    ;; (let* ((d "alg-gptel-helpers")
+    ;;             (autoload-dir  (expand-file-name (concat "setups/" d) user-emacs-directory)))
+    ;;        (delete-file (expand-file-name (concat d "-autoloads.el") autoload-dir))
+    ;;        (package-generate-autoloads d autoload-dir ))
+    :init (load "alg-gptel-helpers-autoloads.el") ;load manually just to get docstrings
+    :load-path "setups/alg-gptel-helpers/"
+    :commands (alg/gptel-export-to-markdown-buffer
+               alg/gptel-toggle-verbosity
+               alg/gptel-toggle-highlight
+               alg/gptel-context-save
+               alg/gptel-context-restore
+               alg/gptel-context-clear
+               alg/gptel-upgrade
+               alg/gptel-save-chat
+               alg/org-kill-file-link)
+     :config
+     (customize-set-variable 'gptel-directives
+                             (alg/generate-gptel-directives 
+                              (expand-file-name "prompts" user-emacs-directory))))
 #+end_src             
 
-I'm also including the original AI chat used to develop this package, for reference.
+I'm also including the original AI chat used to develop this package, for reference and possibly to speed future development.

@@ -1,4 +1,4 @@
-(eval-when-compile (require 'gptel))
+(require 'gptel)
 (message "initializing alg-gptel-tools.el")
 
 ;; copied from karthink's gptel PR on 2025-04-09T1138

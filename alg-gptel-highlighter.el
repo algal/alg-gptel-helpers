@@ -17,7 +17,7 @@
   (setq-local gptel-org--response-highlight-overlays nil))
 
 ;;;###autoload
-(defun alg/gptel-org-toggle-response-highlight ()
+(defun alg/gptel-toggle-highlight ()
   "Toggle diagnostic highlighting of gptel response regions in an Org buffer using overlays.
 
 Reads response extents from the buffer's :GPTEL_BOUNDS: property."
@@ -54,5 +54,18 @@ Reads response extents from the buffer's :GPTEL_BOUNDS: property."
           (message "GPTEL response highlighting ON.")
         (message "GPTEL response highlighting: No regions found to highlight.")))))
 
+;;;###autoload
+(defun alg/gptel-toggle-verbosity ()
+    "Toggle Gptel's logging verbosity."
+    (interactive)
+    (if (eq gptel-log-level 'info)
+        (progn
+          (customize-set-variable 'gptel-log-level nil)
+          (customize-set-variable 'gptel-stream t)
+          (message "Disabled gptel logging"))
+      (progn
+        (customize-set-variable 'gptel-log-level 'info)
+        (customize-set-variable 'gptel-stream nil)
+        (message "Enabled gptel logging"))))
 
 (provide 'alg-gptel-highlighter)
