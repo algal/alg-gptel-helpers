@@ -11,8 +11,10 @@
 (defun alg/org-kill-file-link ()
   "Places a org link to the current file on the yank buffer"
   (interactive)
-  (unless  (fboundp #'kill-file-name)
-    (user-error "Function kill-file-name not available")
+  (message "hello")
+  (if (not  (fboundp #'kill-file-name))
+      (user-error "Function kill-file-name not available")
+    (message "starting")
     (let* ((name (kill-file-name))
            (bname (file-name-nondirectory name))
            (s (format "[[file:%s][%s]]" name bname)))
