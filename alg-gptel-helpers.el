@@ -5,7 +5,7 @@
 (require 'alg-gptel-upgrade)
 (require 'alg-gptel-savechat)
 (require 'alg-gptel-prompts)
-
+(require 'alg-gptel-anthropic-markup)
 
 ;;;###autoload
 (defun alg/org-kill-file-link ()
