@@ -38,32 +38,9 @@ This works with gptel as of [2025-06-01 Sun 13:25].
 If you manually copy the subdirectory alg-gptel-helpers into a ~setups/~ directory off of your user-emacs-directory, then you can enable them with the following use-package declaration:
 
 #+begin_src emacs-lisp
-  (use-package alg-gptel-tools
-    :load-path "setups/alg-gptel-helpers/"
-    :after gptel)
-
-  (use-package alg-gptel-helpers
-    :after gptel
-    ;; autloads regenerated manually with:
-    ;; (let* ((d "alg-gptel-helpers")
-    ;;             (autoload-dir  (expand-file-name (concat "setups/" d) user-emacs-directory)))
-    ;;        (delete-file (expand-file-name (concat d "-autoloads.el") autoload-dir))
-    ;;        (package-generate-autoloads d autoload-dir ))
-    :init (load "alg-gptel-helpers-autoloads.el") ;load manually just to get docstrings
-    :load-path "setups/alg-gptel-helpers/"
-    :commands (alg/gptel-export-to-markdown-buffer
-               alg/gptel-toggle-verbosity
-               alg/gptel-toggle-highlight
-               alg/gptel-context-save
-               alg/gptel-context-restore
-               alg/gptel-context-clear
-               alg/gptel-upgrade
-               alg/gptel-save-chat
-               alg/org-kill-file-link)
-     :config
-     (customize-set-variable 'gptel-directives
-                             (alg/generate-gptel-directives 
-                              (expand-file-name "prompts" user-emacs-directory))))
+(use-package alg-gptel-helpers
+  :load-path "setups/alg-gptel-helpers/"
+  :after gptel)
 #+end_src             
 
 I'm also including the original AI chat used to develop this package, for reference and possibly to speed future development.

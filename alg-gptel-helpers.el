@@ -23,4 +23,3 @@
 
 (provide 'alg-gptel-helpers)
 
-

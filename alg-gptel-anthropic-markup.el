@@ -1,4 +1,5 @@
 (require 'gptel)
+(message "initializing alg-gptel-anthropic-markup.el")
 
 (defun gptel--insert-file-string-around-advice (orig-fun path)
   "Use document format for Anthropic backends, original otherwise."
@@ -20,6 +21,7 @@
   (advice-member-p #'gptel--insert-file-string-around-advice 
                    'gptel--insert-file-string))
 
+;;;###autoload
 (defun alg/toggle-anthropic-markup (&optional enable)
   "Toggle Anthropic document markup for gptel file insertion."
   (interactive "P")
